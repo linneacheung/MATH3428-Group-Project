@@ -8,7 +8,7 @@ Bayesian MCMC Inference for Financial Volatility (VOO vs. NVDA) using a heavy-ta
 
 * **Member 1 (Framework & Sampler Lead):** CHEUNG YUK YING (21063768)
   * Custom Random Walk Metropolis MCMC sampler design with proposal tuning (`mcmc_sampler.R`).
-  * Unconstrained parameter transformations ($\mu, \ln\sigma, \ln(\nu-2)$) and Jacobian corrections (`derivation_draft.md`).
+  * Unconstrained parameter transformations (mu, ln(sigma), ln(nu - 2)) and Jacobian corrections (derivation_draft.md)
   * Synthetic parameter recovery validation and baseline testing.
 
 * **Member 2 (Market Benchmark Analysis):** [name] ([id])
