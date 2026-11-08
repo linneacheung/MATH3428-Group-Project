@@ -7,7 +7,7 @@
 ---
 
 ## 1. Model Likelihood (Student-t)
-
+ 
 We assume the daily financial log-returns $y = (y_1, y_2, \dots, y_n)^T$ follow an independent and identically distributed (i.i.d.) three-parameter Student-$t$ distribution:
 
 $$y_i \overset{\text{iid}}{\sim} t_\nu(\mu, \sigma^2), \quad i = 1, \dots, n$$
