@@ -1,7 +1,7 @@
 # Mathematical Derivation: Student-t Log-Posterior & Jacobian Correction
 
 **Course:** MATH 3428 Bayesian Statistics  
-**Lead:** Member 1 (Framework & Sampler)  
+**Lead:** CHEUNG YUK YING 21063768 (Framework & Sampler)  
 **Deliverable:** Model Formulation & Derivation Draft  
 
 ---
