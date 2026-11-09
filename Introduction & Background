@@ -14,17 +14,19 @@ high volatility regimes produces an unconditional distribution with fatter tails
 and liquidity shortages can amplify price moves in stressed markets. Episodes such as the 1987 crash, the 2008 financial crisis and the COVID-19 sell-off in March 2020 illustrate this behaviour. For a single stock such as NVDA, firm-specific news
 adds a further source of extreme moves, so thicker tails are plausible but must be tested rather than assumed.
 
-The Student-t distribution is a natural and parsimonious model for these features. Its degrees-of-freedom parameter 
-ν directly controls tail thickness. A smaller ν gives heavier tails, and as 
-ν→∞ the distribution converges to the normal. Moments exist only up to order less than 
-ν, so the variance is finite only for ν>2 and the kurtosis only for 
-ν>4. Student-t errors have a long record in financial econometrics (Bollerslev, 1987). A Bayesian approach with Markov chain Monte Carlo (MCMC) is well suited here because it returns a full posterior distribution for 
+The Student-t distribution is a natural and parsimonious model for these features. Its degrees-of-freedom parameter ν directly controls tail thickness.
+A smaller ν gives heavier tails, and as ν→∞ the distribution converges to the normal. Moments exist only up to order less than ν, 
+so the variance is finite only for ν>2 and the kurtosis only for ν>4.
+Student-t errors have a long record in financial econometrics (Bollerslev, 1987). A Bayesian approach with Markov chain Monte Carlo (MCMC) is well suited here because it returns a full posterior distribution for 
 ν rather than a single point estimate. Credible intervals therefore express the uncertainty about tail thickness directly, which is important because 
 ν is difficult to pin down from a limited sample (Gelman et al., 2013).
 
 This project applies a Bayesian Student-t model to the daily log returns of VOO, an exchange-traded fund tracking the S&P 500, and NVDA, a single large-cap stock, over January 2024 to October 2026. We estimate the location μ, scale 
 σ and degrees of freedom ν using random-walk Metropolis sampling, assess convergence with multiple chains, and compare the posterior of 
-ν across the two assets. The main question is whether the diversified index shows lighter tails than the individual stock. The remainder of this report describes the data, the model and sampler, the VOO results, and the comparison with NVDA.
-http://127.0.0.1:11869/graphics/7186ebf4-7a1e-418b-a9d5-0c16a663dfee.png
+ν across the two assets. The main question is whether the diversified index shows lighter tails than the individual stock. The remainder of this report describes the data, the model and sampler, the VOO results, 
+and the comparison with NVDA.
 
+histogram of VOO Daily Log Return
+http://127.0.0.1:11869/graphics/7186ebf4-7a1e-418b-a9d5-0c16a663dfee.png
+Normal Q-Q Plot of VOO Returns
 http://127.0.0.1:11869/graphics/814ac4c6-3084-4a4c-8d16-188f068500d3.png
