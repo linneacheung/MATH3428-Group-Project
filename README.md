@@ -16,7 +16,7 @@ Bayesian MCMC Inference for Financial Volatility (VOO vs. NVDA) using a heavy-ta
   * MCMC convergence diagnostics (Trace plots, Gelman-Rubin $\hat{R}$, ACF).
   * Posterior inference and empirical QQ-plot validation for market benchmark.
 
-* **Member 3 (High-Volatility Tech Asset & Risk Evaluation):** [name] ([id])
+* **Member 3 (High-Volatility Tech Asset & Risk Evaluation):** XIE YI QI (21048574)
   * NVIDIA (NVDA) heavy-tailed volatility modeling via MCMC.
   * Comparative posterior tail analysis ($\nu_{\text{VOO}}$ vs. $\nu_{\text{NVDA}}$).
   * Bayesian Value-at-Risk (VaR) & Expected Shortfall (ES) risk estimation.
