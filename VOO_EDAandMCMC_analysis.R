@@ -65,7 +65,7 @@ chains <- mcmc.list(mcmc(as.matrix(c1$post_samples)),
 # trace plots
 traceplot(chains)
 
-# Gelman-Rubin R-hat
+# Gelman-Rubin R-hat,prove they are converged
 gelman.diag(chains)
 
 #ESS
