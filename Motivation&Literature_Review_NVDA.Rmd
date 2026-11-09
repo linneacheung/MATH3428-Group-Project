@@ -1,0 +1,26 @@
+---
+title: "Motivation & Literature Review - NVDA Stream"
+output: pdf_document
+---
+
+## Why NVDA and Student-t?
+
+NVIDIA (NVDA) is an ideal testing ground for heavy-tailed volatility models. As documented by Cont (2001), a fundamental "stylized fact" across financial markets is the presence of heavy tails and extreme fluctuations. In the statistical analysis of highly volatile assets, these extreme fluctuations manifest as jump risks—heavy-tailed deviations and extreme outliers that Gaussian assumptions fail to capture.
+
+Traditional financial models typically assume returns follow a normal distribution, which severely underestimates the probability of extreme events. To capture NVDA's inherent extreme market movements, we adopt a Student-t likelihood. However, from a statistical computing perspective, the posterior distribution of a Student-t model with unknown degrees of freedom is non-standard and lacks a closed-form solution. This absence of a conjugate prior naturally motivates our use of Bayesian inference via Markov Chain Monte Carlo (MCMC) methods.
+
+## Preliminary EDA Findings
+
+Using daily log returns from 2024-01-02 to 2026-09-30 (N = 688), the annualized sample standard deviation is approximately 47.8%, confirming NVDA's status as a highly volatile, high-risk tech stock. The sample kurtosis is 7.72, far above the normal benchmark of 3. The most extreme daily loss and gain in this period were -18.6% and +17.2%, respectively. These severe outliers serve as direct empirical evidence of the extreme jump risks within the dataset.
+
+The histogram (Figure 1) shows that a fitted normal curve underestimates density near the mode and severely underestimates density in both tails. The Q-Q plot (Figure 2) confirms a systematic departure from normality. The distinct S-shape in the Q-Q plot clearly indicates a leptokurtic distribution, consistent with NVDA's highly volatile nature. The sample skewness is -0.09, indicating near symmetry.
+
+## Methodology Preview and Literature Context
+
+The Student-t distribution is the simplest formalization of heavy tails (e.g., Fama, 1965; Bollerslev, 1987), acting as a robust statistical proxy for jump-induced outliers. To estimate the parameters of this Student-t model, we will implement a custom Random Walk Metropolis (RWM) algorithm. Because the scale parameter \(\sigma\) and degrees of freedom \(\nu\) are constrained (e.g., \(\nu > 2\)), we will apply unconstrained transformations (e.g., \(\ln\sigma\) and \(\ln(\nu-2)\)) and include Jacobian corrections in the log-posterior density.
+
+Furthermore, to ensure the reliability of our Bayesian estimates, we will generate three independent MCMC chains with overdispersed initial values. We will evaluate convergence using Trace plots, the Gelman-Rubin \(\hat{R}\) statistic, and Effective Sample Size (ESS), following the diagnostic frameworks covered in class. Ultimately, this MCMC implementation will allow us to conduct a comparative risk analysis, demonstrating how the Student-t model provides more realistic risk bounds than the Normal model during extreme market downturns.
+
+![NVDA Daily Log Returns vs Normal Fit](nvda_hist.png)
+
+![NVDA Log Returns Normal Q-Q Plot](nvda_qqplot.png)
