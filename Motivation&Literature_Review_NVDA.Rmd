@@ -1,6 +1,5 @@
 ---
 title: "Motivation & Literature Review - NVDA Stream"
-author: MATH3428 Group Project - Group 1 - XIE YI QI
 output: pdf_document
 ---
 

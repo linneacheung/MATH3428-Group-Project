@@ -1,6 +1,6 @@
 # ============================================
-# NVDA EDA
-# MATH3428 Group Project - Group 1 - XIE YI QI
+# NVDA Week 1 EDA
+# MATH3428 Project - Member 3
 # Data range: 2024-01-01 to 2026-09-30
 # ============================================
 
