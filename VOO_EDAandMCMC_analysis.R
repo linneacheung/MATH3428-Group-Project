@@ -6,15 +6,17 @@
 
 install.packages("quantmod")
 install.packages("moments")
+install.packages("coda")
 
+library("coda")
 library(quantmod)
+library(moments)
+
 getSymbols("VOO", from = "2024-01-01", to = "2026-10-01")
 price <- Ad(VOO)
 y <- as.numeric(diff(log(price)))
 y <- y[!is.na(y)]
 
-
-library(moments)
 
 stats <- c(Mean = mean(y),
            SD = sd(y),
@@ -28,7 +30,7 @@ hist(y, breaks = 50, freq = FALSE,
      main = "VOO Daily Log Returns", xlab = "Log return")
 curve(dnorm(x, mean(y), sd(y)), add = TRUE, lwd = 2)
 
-#QQ plot
+#QQ plot of EDA
 qqnorm(y, main = "Normal Q-Q Plot of VOO Returns")
 qqline(y)
 
@@ -39,7 +41,7 @@ getwd()
 source("mcmc_sampler.R")
 length(y)
 mean(y)
-
+#get 3 mcmc chain
 set.seed(123)
 c1 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000,
                          init_theta = c( 0.000, log(0.005), log(5)))
@@ -81,3 +83,18 @@ colMeans(post)
 apply(post, 2, median)
 apply(post, 2, sd)
 apply(post, 2, quantile, probs = c(0.025, 0.975))
+
+#student-t qq-plot
+
+mu_hat    <- mean(post[, "mu"])
+sigma_hat <- mean(post[, "sigma"])
+nu_hat    <- mean(post[, "nu"])
+
+p <- ppoints(length(y))
+theoretical <- mu_hat + sigma_hat * qt(p, df = nu_hat)
+
+plot(theoretical, sort(y),
+     xlab = "Fitted Student-t quantiles",
+     ylab = "Sorted VOO returns",
+     main = "Fitted Student-t QQ plot (VOO)")
+abline(0, 1, col = "red")
