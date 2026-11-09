@@ -68,3 +68,16 @@ gelman.diag(chains)
 
 #ESS
 effectiveSize(chains)
+
+#ACF
+autocorr.plot(chains)
+autocorr.diag(chains)
+
+#posterior inference code
+post <- do.call(rbind, lapply(list(c1, c2, c3),
+                              function(ch) as.matrix(ch$post_samples)))
+
+colMeans(post)
+apply(post, 2, median)
+apply(post, 2, sd)
+apply(post, 2, quantile, probs = c(0.025, 0.975))
