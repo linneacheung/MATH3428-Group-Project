@@ -11,7 +11,7 @@ Bayesian MCMC Inference for Financial Volatility (VOO vs. NVDA) using a heavy-ta
   * Unconstrained parameter transformations (mu, ln(sigma), ln(nu - 2)) and Jacobian corrections (derivation_draft.md)
   * Synthetic parameter recovery validation and baseline testing.
 
-* **Member 2 (Market Benchmark Analysis):** [name] ([id])
+* **Member 2 (Market Benchmark Analysis):** NG WAI KIU (21172181)
   * S&P 500 ETF (VOO) log-return historical data acquisition & EDA.
   * MCMC convergence diagnostics (Trace plots, Gelman-Rubin $\hat{R}$, ACF).
   * Posterior inference and empirical QQ-plot validation for market benchmark.
