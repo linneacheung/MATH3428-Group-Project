@@ -1,1 +1,58 @@
-We use daily adjusted closing prices of VOO (Vanguard S&P 500 ETF) from Yahoo Finance, covering 1 January 2024 to 1 October 2026. Daily log returns are calculated as  which gives n= 688 observations.
+---
+title: "VOO empirical result"
+output: pdf_document
+---
+##Date
+We use daily adjusted closing prices of VOO (Vanguard S&P 500 ETF) from Yahoo Finance, covering 1 January 2024 to 1 October 2026. Daily log returns are calculated as r_t=ln(P_t/P_t-1), which gives n=688 obversations.
+
+##Data analysis
+ The following is the summary statistics. The mean daily return is 0.00075 and the standard deviation is 0.0095. The skewness is 0.32772. The raw kurtosis is 16.96733, so the excess kurtosis is 13.96733. A Normal distribution has a raw kurtosis of 3, so VOO has heavier tails than the Normal.
+ 
+Figure 1 shows the return series.
+The black curve is the Normal density with the sample mean and SD. The grey bars are actual data of VOO. The histogram has a taller peak around zero than the Normal curve, and a few extreme returns appear in the tails where the Normal density is almost zero.
+
+![figure 1:VOO Daily Log Returns](hist_stat_VOO.png)
+
+In the Normal QQ-plot (Figure 2), the points follow the line near the center but leave it at both ends. The lower tail lies below the line and the upper tail lies above it, forming an S-shape. This means the data are symmetric with heavy tails.  Besides, at the same probability level, the observed returns are larger in size than a Normal distribution implies, so extreme returns happen more often than the Normal model predicts.
+
+![figure 2:Normal Q-Q Plot of VOO Returns](QQplot_VOO_EDA.png)
+
+##MCMC Implementation
+
+We ran 3 independent chains, each with 20000 iterations and a burn-in of 5000. The starting values were dispersed on purpose, with ν starting at 5, 15 and 40, so that convergence can be tested properly. The acceptance rates were 0.34085, 0.34480 and 0.33480. For random-walk Metropolis, rates between roughly 0.15 and 0.4 are considered reasonable (Roberts, Gelman and Gilks, 1997), so these rates are acceptable. 
+
+##Convergence Diagnostics
+
+The trace plots (Figure 3) show that the three chains mix well and overlap after burn-in, with no visible trend or drift. Be the result of Gelman-Rubin diagnostic, it gives estimate of 1.00 for μ, 1.00 for σ and 1.00 for ν, with upper confidence limits of at most about 1.01. Since the chains started from dispersed values and these values are close to 1, we find no evidence of non-convergence. 
+
+##Result of Gelman-Rubin diagnostic
+      Point est. Upper C.I.
+mu             1       1.00
+sigma          1       1.01
+nu             1       1.01
+
+![figure 3:Trace of nu](Trace_of_nu.png)
+
+##Posterior Results
+
+We pooled the post burn-in samples from the 3 chains. The below gives the posterior summaries.See below,
+
+               mu       sigma          nu 
+mean      0.001106816 0.006340781 3.808017824 
+median    0.001107092 0.006336920 3.754762196
+sd        0.0002880816 0.0002949425 0.5639525822
+
+Credible interval:
+  mu       sigma       nu
+2.5%  0.0005381585 0.005765852 2.856688
+97.5% 0.0016812420 0.006940266 5.041377
+
+The posterior mean of μ is 0.0011, and its 95% credible interval (0.0005, 0.0017) excludes zero, which indicates a small positive typical daily return over the sample period. The scale parameter 
+σ has posterior mean 0.0063 (95% CI 0.0058 to 0.0069). 
+The posterior mean of ν is 3.81 with a 95% credible interval of (2.86, 5.04).This indicates that VOO returns have much heavier tails than a Normal distribution.Because the interval includes values below 4, the fourth moment of the fitted model may not exist, so we interpret tail heaviness through ν and not through model kurtosis.
+
+##Model Fit
+
+Figure 4 shows the QQ-plot against the fitted Student-t, using the posterior estimates. The points lie close to the 45-degree line, including in the tails, which is clearly better than the Normal QQ-plot in Figure 2. So the Student-t is a better description of the unconditional distribution of VOO returns. 
+
+![Fitted Student-t QQ plot of VOO](Fitted_qqplot.png)
