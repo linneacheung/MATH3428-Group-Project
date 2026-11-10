@@ -5,7 +5,7 @@
 
 ##Motivation
 
-Financial risk assessment includes portfolio management, derivative pricing,and regulatory capital requirements.
+Financial risk assessment includes portfolio management, derivatives pricing,and regulatory capital requirements.
 Value at Risk (VaR) is one of the risk measures that can determine the proposed distribution of asset returns.
 Therefore, a proper distributional assumption can reduce minrepresentation of risk.
 
@@ -13,7 +13,7 @@ Therefore, a proper distributional assumption can reduce minrepresentation of ri
 ##Stylized Facts of Financial Returns
 
 Empirical research has proved that asset returns depart from normality.
-Mandelbrot (1963) and Fama (1965),The Variation of Certain Speculative Prices, The Journal of Business (1963), observed that price changes exhibit tails heavier than a Normal distribution. This observation holds for most liquid assets, including heavy tails, volatility clustering, and the absence of linear autocorrelation. 
+Mandelbrot (1963) and Fama (1965),The Variation of Certain Speculative Prices, The Journal of Business (1963), observed that price changes exhibit tails heavier than a Normal distribution. This observation holds for most liquid assets, including heavy tails, volatility concentration, and the absence of linear autocorrelation. 
 the sample kurtosis of daily returns is typically well above the Normal benchmark of 3, which means a Gaussian model assigns too little probability to extreme events and understates tail risk. A student-t distribution is used to reduce this error.
 
 ##Student-t likelihood
@@ -35,6 +35,6 @@ For every stock we run 3 chains and check convergence with trace plots, R-hat an
 We apply the framework to two contrasting assets.
 
 VOO (Vanguard S&P 500 ETF) serves as the market benchmark. It is diversified, so it mainly reflects systematic market risk.
-NVDA (NVIDIA Corporation) represents a high-growth technology stock. It is expected to show higher volatility and heavier tails because of concentrated, firm-specific and sector-specific risk.
+NVDA (NVIDIA Corporation) represents a high-growth technology stock. It is expected to show higher volatility and heavier tails because of concentrated, firm-specific risk.
 
-Comparing the two allows us to analyse tail heaviness and volatility.
+Comparing the two allows us to analyze tail heaviness and volatility.
