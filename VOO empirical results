@@ -1,0 +1,1 @@
+We use daily adjusted closing prices of VOO (Vanguard S&P 500 ETF) from Yahoo Finance, covering 1 January 2024 to 1 October 2026. Daily log returns are calculated as  which gives n= 688 observations.
