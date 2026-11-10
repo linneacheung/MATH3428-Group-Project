@@ -3,3 +3,38 @@
 # Introduction and Background of VOO
 # ===================================================
 
+##Motivation
+
+Financial risk assessment includes portfolio management, derivative pricing,and regulatory capital requirements.
+Value at Risk (VaR) is one of the risk measures that can determine the proposed distribution of asset returns.
+Therefore, a proper distributional assumption can reduce minrepresentation of risk.
+
+
+##Stylized Facts of Financial Returns
+
+Empirical research has proved that asset returns depart from normality.
+Mandelbrot (1963) and Fama (1965),The Variation of Certain Speculative Prices, The Journal of Business (1963), observed that price changes exhibit tails heavier than a Normal distribution. This observation holds for most liquid assets, including heavy tails, volatility clustering, and the absence of linear autocorrelation. 
+the sample kurtosis of daily returns is typically well above the Normal benchmark of 3, which means a Gaussian model assigns too little probability to extreme events and understates tail risk. A student-t distribution is used to reduce this error.
+
+##Student-t likelihood
+
+The Student-t distribution is a natural alternative to the Normal because its degrees of freedom parameter ν controls tail thickness. 
+As smaller ν gives heavier tails, allows the data to determine how heavy the tails are. 
+
+##Why Bayesian Inference and MCMC
+We use a Bayesian approach because it gives a full posterior distribution for μ, σ and ν, not just one point estimate.
+This matters most for ν. It is needed many extreme days to tell moderately heavy tails from very heavy tails. With a prior, the estimate stays more stable,
+and the posterior shows how uncertain we really are. We can also carry this uncertainty into the VaR later.
+
+The posterior of a Student-t model has no closed form, so we cannot sample from it directly. 
+We use a Metropolis-Hastings sampler (Metropolis et al., 1953, Hastings, 1970) and MCMC method that our group built from scratch.
+For every stock we run 3 chains and check convergence with trace plots, R-hat and ESS. 
+
+##Assets Under Study
+
+We apply the framework to two contrasting assets.
+
+VOO (Vanguard S&P 500 ETF) serves as the market benchmark. It is diversified, so it mainly reflects systematic market risk.
+NVDA (NVIDIA Corporation) represents a high-growth technology stock. It is expected to show higher volatility and heavier tails because of concentrated, firm-specific and sector-specific risk.
+
+Comparing the two allows us to analyse tail heaviness and volatility.
