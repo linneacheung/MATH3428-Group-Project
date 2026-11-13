@@ -16,17 +16,18 @@ nvda <- getSymbols("NVDA", from = "2024-01-01", to = "2026-10-01", auto.assign =
 y_vec <- na.omit(diff(log(Ad(nvda))))
 y <- as.numeric(y_vec)
 
-# 2. Run 3 MCMC chains (Unified with VOO)
+# 2. Run 3 MCMC chains
 cat("Running 3 MCMC chains...\n")
 set.seed(123)
+prop_sd_new <- c(0.0006, 0.03, 0.25) * 1.25
 
 init_1 <- c( 0.000, log(0.005), log(5))
 init_2 <- c( 0.001, log(0.020), log(15))
 init_3 <- c(-0.001, log(0.010), log(40))
 
-chain1 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_1)
-chain2 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_2)
-chain3 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_3)
+chain1 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_1, prop_sd = prop_sd_new)
+chain2 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_2, prop_sd = prop_sd_new)
+chain3 <- run_student_t_mcmc(y, n_iter = 20000, burn_in = 5000, init_theta = init_3, prop_sd = prop_sd_new)
 
 acc <- c(chain1$acceptance_rate, chain2$acceptance_rate, chain3$acceptance_rate)
 cat("Acceptance rates:", round(acc, 4), 
@@ -139,4 +140,4 @@ print(risk_table, digits = 4)
 cat("\n--- Kupiec violations table ---\n")
 print(viol_table, digits = 4)
 
-cat("\nMCMC done! n")
+cat("\nNVDA_MCMC done! \n")
