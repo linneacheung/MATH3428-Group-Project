@@ -52,7 +52,7 @@ Figure 5 displays the Q-Q plot of the empirical returns against the fitted Stude
 
 ![Fitted Student-t Q-Q Plot](fig_nvda_qq_student_t.png){width=65%}
 
-\newpage
+
 
 # 3. Comparative Risk Analysis: VaR & Expected Shortfall
 
@@ -69,18 +69,28 @@ At the 95% level, the Normal model predicts a slightly deeper VaR (4.72%) than t
 
 At the 99% level, however, the Normal model's thin tail causes it to underestimate risk. The Student-t model estimates a 99% VaR of 7.44% and an ES of 9.86%. An exact binomial coverage test confirms this: the Normal model yields 13 violations (rate 1.89%, p-value = 0.031), while the Student-t model yields only 7 violations (rate 1.02%, p-value = 0.848), aligning with the theoretical expectation.
 
+\newpage
+
 # 4. Comparative Analysis: VOO vs NVDA
 
 Comparing the two streams reveals how the Student-t model adapts to different datasets.
 
 **1. Tail Index (\(\nu\))**
-VOO has a lower posterior median of \(\nu\) (3.76, 95% CI: [2.84, 5.14]) compared to NVDA (5.16, 95% CI: [3.69, 7.63]). A smaller \(\nu\) implies thicker tails. However, the credible intervals overlap significantly, so we cannot firmly conclude VOO has a significantly thicker tail. Additionally, both intervals contain values below 4, meaning the fourth moment might not exist.
+
+VOO has a lower posterior median of \(\nu\) (3.75, 95% CI: [2.86, 5.04]) compared to NVDA (5.16, 95% CI: [3.69, 7.63]). A smaller \(\nu\) implies thicker tails. However, the credible intervals overlap significantly, so we cannot firmly conclude VOO has a significantly thicker tail. Additionally, both intervals contain values below 4, meaning the fourth moment might not exist.
 
 **2. Empirical Kurtosis**
+
 This result is driven by the raw data. VOO has a much higher sample kurtosis (16.97) than NVDA (7.72). Because the VOO dataset has more extreme outliers, the Student-t likelihood causes the algorithm to estimate a lower \(\nu\) to match the empirical distribution.
 
 **3. Absolute Risk**
+
 Despite VOO's lower \(\nu\), its scale parameter (\(\sigma \approx 0.0063\)) is much smaller than NVDA's (\(\sigma \approx 0.0231\)), meaning its day-to-day fluctuations are smaller. Consequently, NVDA carries much higher absolute risk: its 99% VaR is 7.44% and ES is 9.86%. The coverage test confirms the Student-t model fits NVDA well (p = 0.848), while the Normal model performs poorly (p = 0.031).
+
+**4. Methodological Note on Independent Tuning**
+
+Because VOO and NVDA have vastly different scale parameters (\(\sigma\)), applying identical absolute step-sizes is inappropriate. We independently tuned the proposal step-size for each asset, achieving acceptance rates of 34.0% for VOO and 43.6% for NVDA. Both chains achieved \(\hat{R}=1.00\), ensuring a fair statistical comparison.
+
 
 # 5. NVDA Stream Summary
 
